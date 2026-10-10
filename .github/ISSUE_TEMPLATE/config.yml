@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 现在很难受，需要有人说话
+    url: https://www.gov.cn/zhengce/zhengceku/202412/content_6994470.htm
+    about: issue 区没人能及时回复你。请打 12356（全国心理援助热线）；有危险请打 110 或 120。
+  - name: 想讲讲自己的经历
+    url: https://github.com/zoey1108/HowToHealHeartbreak/discussions
+    about: 请去 Discussions。正文不收个人经历，也请别写出能认出具体人的信息。
