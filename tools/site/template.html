@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>失恋后自救手册</title>
+<meta name="description" content="分手以后，哪些事要先保住，哪些决定要往后放，什么时候该去找专业帮助。每条写明成本、证据等级和出处。">
+<style>
+:root {
+  --bg: #faf8f5; --surface: #ffffff; --text: #23211f; --muted: #6b665f; --line: #e6e1d9;
+  --accent: #8a4b5c; --accent-soft: #f3e8eb; --danger: #a23b2a; --danger-soft: #fbece8;
+  --chip: #f1ede7; --chip-on: #23211f; --chip-on-text: #faf8f5;
+  --a: #2f6b4f; --b: #8a6a1f; --c: #6b665f;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #171615; --surface: #201f1d; --text: #ece8e2; --muted: #a39d94; --line: #34312d;
+    --accent: #d39aa9; --accent-soft: #3a2a2f; --danger: #f08f7c; --danger-soft: #3a231e;
+    --chip: #2a2826; --chip-on: #ece8e2; --chip-on-text: #171615;
+    --a: #7fc4a2; --b: #d8b866; --c: #a39d94;
+  }
+}
+:root[data-theme="dark"] {
+  --bg: #171615; --surface: #201f1d; --text: #ece8e2; --muted: #a39d94; --line: #34312d;
+  --accent: #d39aa9; --accent-soft: #3a2a2f; --danger: #f08f7c; --danger-soft: #3a231e;
+  --chip: #2a2826; --chip-on: #ece8e2; --chip-on-text: #171615;
+  --a: #7fc4a2; --b: #d8b866; --c: #a39d94;
+}
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0; background: var(--bg); color: var(--text);
+  font: 16px/1.75 -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "Noto Sans CJK SC", sans-serif;
+}
+a { color: var(--accent); }
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 16px 64px; }
+header { padding: 40px 0 8px; }
+h1 { font-size: 28px; line-height: 1.3; margin: 0 0 8px; letter-spacing: .02em; }
+.sub { color: var(--muted); margin: 0; }
+.stats { color: var(--muted); font-size: 14px; margin: 8px 0 0; }
+#danger {
+  background: var(--danger-soft); border-left: 4px solid var(--danger);
+  border-radius: 8px; padding: 12px 16px; margin: 20px 0;
+}
+#danger p { margin: 0 0 4px; font-weight: 600; color: var(--danger); }
+#danger ul { margin: 0; padding-left: 20px; }
+#danger strong { font-size: 1.05em; }
+.controls { position: sticky; top: 0; background: var(--bg); padding: 12px 0; z-index: 2; border-bottom: 1px solid var(--line); }
+input[type=search] {
+  width: 100%; font: inherit; padding: 10px 14px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--surface); color: var(--text);
+}
+.row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+.row .label { font-size: 13px; color: var(--muted); align-self: center; margin-right: 2px; }
+button.chip {
+  font: inherit; font-size: 14px; border: 0; border-radius: 999px; padding: 4px 12px;
+  background: var(--chip); color: var(--text); cursor: pointer;
+}
+button.chip[aria-pressed="true"] { background: var(--chip-on); color: var(--chip-on-text); }
+.count { font-size: 13px; color: var(--muted); margin-top: 8px; }
+h2 { font-size: 20px; margin: 36px 0 4px; }
+.intro { color: var(--muted); margin: 0 0 12px; font-size: 15px; }
+article {
+  background: var(--surface); border: 1px solid var(--line); border-radius: 12px;
+  padding: 16px 18px; margin: 12px 0; scroll-margin-top: 150px;
+}
+article:target { outline: 2px solid var(--accent); }
+article h3 { font-size: 17px; line-height: 1.5; margin: 0 0 8px; }
+.meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 8px; font-size: 12px; }
+.tag { padding: 1px 8px; border-radius: 6px; background: var(--chip); color: var(--muted); }
+.lv { font-weight: 700; }
+.lv-A { color: var(--a); } .lv-B { color: var(--b); } .lv-C { color: var(--c); }
+.plain { font-size: 16px; margin: 0 0 8px; }
+dl { margin: 0; font-size: 14px; }
+dt { color: var(--muted); font-size: 13px; margin-top: 8px; }
+dd { margin: 0; overflow-wrap: anywhere; }
+details { margin-top: 8px; font-size: 14px; }
+summary { cursor: pointer; color: var(--muted); font-size: 13px; }
+.empty { color: var(--muted); padding: 24px 0; }
+footer { color: var(--muted); font-size: 13px; margin-top: 48px; }
+.theme { float: right; font-size: 13px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <button class="chip theme" id="theme" type="button">深色 / 浅色</button>
+    <h1>失恋后自救手册</h1>
+    <p class="sub">分手以后，哪些事要先保住，哪些决定要往后放，什么时候该去找专业帮助。不教挽回，不教报复。</p>
+    <p class="stats" id="stats"></p>
+  </header>
+
+  <section id="danger"></section>
+
+  <div class="controls">
+    <input type="search" id="q" placeholder="搜点什么，比如：删好友、借钱、睡不着" aria-label="搜索">
+    <div class="row" id="stages"><span class="label">阶段</span></div>
+    <div class="row" id="kinds"><span class="label">换回</span></div>
+    <div class="row" id="levels"><span class="label">证据</span></div>
+    <div class="count" id="count"></div>
+  </div>
+
+  <main id="list"></main>
+
+  <footer>
+    <p>内容可能有错，也可能过时。看病、报警、打官司时，以医生、警察和律师的说法为准。</p>
+    <p>正文以 CC BY 4.0 发布。<a id="repo" href="#">仓库</a> · 版本 <span id="ver"></span></p>
+  </footer>
+</div>
+<script>
+const DATA = /*__DATA__*/null;
+
+const esc = (s) => s.replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' })[c]);
+function md(s, secNo) {
+  let h = esc(s);
+  h = h.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+  h = h.replace(/\[([^\]]+)\]\(([^)]+)\)/g, (m, t, u) => {
+    const sec = u.match(/^0?(\d)-.+\.md$/);
+    return sec ? `<a href="#s${Number(sec[1])}">${t}</a>` : `<a href="${u}" target="_blank" rel="noopener">${t}</a>`;
+  });
+  h = h.replace(/(^|[^"=])(https?:\/\/[^\s<；，]+)/g, '$1<a href="$2" target="_blank" rel="noopener">$2</a>');
+  h = h.replace(/(原书[^。；]{0,12})?(见)?第 (\d+) 节第 (\d+) 条/g, (m, orig, jian, n, k) =>
+    orig ? m : `${jian || ''}<a href="#s${n}-${k}">第 ${n} 节第 ${k} 条</a>`);
+  h = h.replace(/(?<![节>])第 (\d+) 条（/g, (m, k) => `<a href="#s${secNo}-${k}">第 ${k} 条</a>（`);
+  return h;
+}
+
+const state = { q: '', stage: 0, kind: '', level: '' };
+const items = DATA.sections.flatMap((s) => s.items.map((it) => ({ ...it, sec: s })));
+
+document.getElementById('danger').innerHTML = DATA.danger;
+document.getElementById('stats').textContent = DATA.stats;
+document.getElementById('repo').href = DATA.repo;
+document.getElementById('ver').textContent = DATA.version;
+
+function chips(id, options, key) {
+  const row = document.getElementById(id);
+  for (const [value, label] of options) {
+    const b = document.createElement('button');
+    b.type = 'button'; b.className = 'chip'; b.textContent = label; b.dataset.value = value;
+    b.addEventListener('click', () => {
+      state[key] = state[key] === value ? (key === 'stage' ? 0 : '') : value;
+      sync(); render();
+    });
+    row.appendChild(b);
+  }
+}
+chips('stages', DATA.sections.map((s) => [s.no, s.name]), 'stage');
+chips('kinds', DATA.kinds.map((k) => [k, k]), 'kind');
+chips('levels', [['A', 'A'], ['B', 'B'], ['C', 'C']], 'level');
+
+function sync() {
+  for (const [id, key] of [['stages', 'stage'], ['kinds', 'kind'], ['levels', 'level']]) {
+    for (const b of document.querySelectorAll(`#${id} button`)) {
+      b.setAttribute('aria-pressed', String(String(state[key]) === b.dataset.value));
+    }
+  }
+}
+
+function match(it) {
+  if (state.stage && it.sec.no !== state.stage) return false;
+  if (state.kind && it.tags.口径 !== state.kind) return false;
+  if (state.level && it.fields['证据等级'] !== state.level) return false;
+  if (state.q) {
+    const hay = (it.title + Object.values(it.fields).join(' ')).toLowerCase();
+    return state.q.toLowerCase().split(/\s+/).every((w) => hay.includes(w));
+  }
+  return true;
+}
+
+function card(it) {
+  const f = it.fields, n = it.sec.no;
+  const lv = f['证据等级'];
+  return `<article id="s${n}-${it.no}">
+    <h3>${n}.${it.no} ${esc(it.title)}</h3>
+    <div class="meta"><span class="tag">${esc(it.sec.name)}</span><span class="tag">${esc(it.tags.口径)}</span><span class="tag lv lv-${lv}">证据 ${lv}</span></div>
+    <p class="plain">${md(f['说人话'], n)}</p>
+    <dl><dt>成本</dt><dd>${md(f['成本'], n)}</dd><dt>适用与例外</dt><dd>${md(f['适用与例外'], n)}</dd></dl>
+    <details><summary>收益、来源${f['备注'] ? '、备注' : ''}</summary><dl>
+      <dt>收益</dt><dd>${md(f['收益'], n)}</dd>
+      <dt>来源</dt><dd>${md(f['来源'], n)}</dd>
+      ${f['备注'] ? `<dt>备注</dt><dd>${md(f['备注'], n)}</dd>` : ''}
+    </dl></details>
+  </article>`;
+}
+
+function render() {
+  const out = [];
+  let shown = 0;
+  for (const s of DATA.sections) {
+    const list = s.items.map((it) => items.find((x) => x.sec.no === s.no && x.no === it.no)).filter(match);
+    if (!list.length) continue;
+    shown += list.length;
+    out.push(`<h2 id="s${s.no}">${s.no}. ${esc(s.name)}</h2>`);
+    if (!state.q && !state.kind && !state.level) out.push(`<p class="intro">${md(s.intro, s.no)}</p>`);
+    out.push(list.map(card).join(''));
+  }
+  document.getElementById('list').innerHTML = out.join('') || '<p class="empty">没有找到。换个说法试试，或者清掉筛选。</p>';
+  document.getElementById('count').textContent = `显示 ${shown} / ${items.length} 条`;
+}
+
+document.getElementById('q').addEventListener('input', (e) => { state.q = e.target.value.trim(); render(); });
+
+// 点了被筛掉的条目链接时，清掉筛选再跳
+document.addEventListener('click', (e) => {
+  const a = e.target.closest('a[href^="#s"]');
+  if (!a) return;
+  const id = a.getAttribute('href').slice(1);
+  if (!document.getElementById(id)) {
+    Object.assign(state, { q: '', stage: 0, kind: '', level: '' });
+    document.getElementById('q').value = '';
+    sync(); render();
+    requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView());
+  }
+});
+
+const root = document.documentElement;
+try { const t = localStorage.getItem('theme'); if (t) root.dataset.theme = t; } catch (e) {}
+document.getElementById('theme').addEventListener('click', () => {
+  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme = dark ? 'light' : 'dark';
+  try { localStorage.setItem('theme', root.dataset.theme); } catch (e) {}
+});
+
+sync(); render();
+</script>
+</body>
+</html>

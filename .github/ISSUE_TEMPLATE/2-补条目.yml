@@ -1,0 +1,43 @@
+name: 补条目：书里缺了一件该写的事
+description: 建议新增一条。先回答下面四个问题，答不上来的先别提。
+title: "补条目："
+labels: ["补条目"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        这本手册不教挽回，也不教报复。教人怎么追回对方、怎么让对方后悔的建议不会收。
+        想讲自己的经历，请去 Discussions，正文不收个人经历。
+  - type: textarea
+    id: action
+    attributes:
+      label: 建议做什么
+      description: 一句话，动词开头，写清场景。比如「分手后先把共同账号的密码改掉」。
+    validations:
+      required: true
+  - type: textarea
+    id: who
+    attributes:
+      label: 普通读者真会碰上吗？
+    validations:
+      required: true
+  - type: textarea
+    id: unknown
+    attributes:
+      label: 读者是不是普遍不知道、以为没事？
+    validations:
+      required: true
+  - type: textarea
+    id: new
+    attributes:
+      label: 给的动作是新的吗？
+      description: 书里有没有同一件事？有的话写出是第几节第几条，说明差别在哪。
+    validations:
+      required: true
+  - type: textarea
+    id: source
+    attributes:
+      label: 原始来源
+      description: 期刊论文（附 DOI）、法条原文、官方文件。没有原始来源的，只能作为 C 级（通行做法）考虑。
+    validations:
+      required: true

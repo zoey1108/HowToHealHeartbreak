@@ -1,0 +1,83 @@
+# 正文检查 + 生成网页、PDF、72 小时卡片
+# - PR：只检查和生成，不发布
+# - main：生成后挂到固定 Release「latest」（下载链接不变）；仓库公开时同时部署 GitHub Pages
+name: book
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: book-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 危险信号块和统计数字已同步
+        run: node tools/sync.mjs --check
+      - name: 条目格式、句长、指路、证据等级
+        run: node tools/check.mjs
+
+  build:
+    needs: check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: 中文字体
+        run: sudo apt-get update && sudo apt-get install -y fonts-noto-cjk
+      - name: 生成 HTML
+        run: node tools/build.mjs
+      - name: PDF 和卡片图片（无头 Chrome）
+        run: |
+          CHROME=$(command -v google-chrome || command -v chromium)
+          "$CHROME" --headless=new --no-sandbox --disable-gpu --no-pdf-header-footer \
+            --print-to-pdf=dist/HowToHealHeartbreak.pdf "file://$PWD/dist/print.html"
+          "$CHROME" --headless=new --no-sandbox --disable-gpu --hide-scrollbars --window-size=1080,1920 \
+            --screenshot=dist/card-72h.png "file://$PWD/dist/card-72h.html"
+          test -s dist/HowToHealHeartbreak.pdf
+          test -s dist/card-72h.png
+      - uses: actions/upload-artifact@v4
+        with:
+          name: dist
+          path: dist/
+      - name: 发布到 Release「latest」
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release view latest >/dev/null 2>&1 || \
+            gh release create latest --title "最新版" --notes "正文每次更新后自动生成，下载链接不变。"
+          gh release upload latest --clobber \
+            dist/HowToHealHeartbreak.html dist/HowToHealHeartbreak.pdf dist/card-72h.png
+      - name: 打包 Pages
+        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && !github.event.repository.private
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist/
+
+  pages:
+    needs: build
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && !github.event.repository.private
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4
