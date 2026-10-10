@@ -57,7 +57,7 @@ jobs:
           name: dist
           path: dist/
       - name: 发布到 Release「latest」
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
@@ -66,14 +66,14 @@ jobs:
           gh release upload latest --clobber \
             dist/HowToHealHeartbreak.html dist/HowToHealHeartbreak.pdf dist/card-72h.png
       - name: 打包 Pages
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main' && !github.event.repository.private
+        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && !github.event.repository.private
         uses: actions/upload-pages-artifact@v3
         with:
           path: dist/
 
   pages:
     needs: build
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main' && !github.event.repository.private
+    if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main' && !github.event.repository.private
     runs-on: ubuntu-latest
     environment:
       name: github-pages
