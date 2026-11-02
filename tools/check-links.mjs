@@ -24,6 +24,8 @@ async function ok(url) {
       });
       // 出版社常对机器人回 403，但 doi.org 能解析到就说明 DOI 是真的
       if (res.ok || (url.includes('doi.org') && [401, 403, 418, 429].includes(res.status))) return true;
+      // 不少政府网站拦海外 IP，CI 在 GitHub 的服务器上跑会被回 403，国内打开是好的。这类只提醒，不算坏链
+      if (method === 'GET' && [401, 403, 418, 429].includes(res.status)) return 'blocked';
       if (method === 'GET') return `HTTP ${res.status}`;
     } catch (e) {
       // 不少政府网站证书链不完整：浏览器会自己补中间证书，Node 不会。这类只提醒，不算坏链
@@ -35,16 +37,19 @@ async function ok(url) {
 
 const bad = [];
 const certs = [];
+const blocked = [];
 await Promise.all(
   [...urls.keys()].map(async (u) => {
     const r = await ok(u);
     if (r === 'cert') certs.push(`${u}  （${urls.get(u).join('、')}）`);
+    else if (r === 'blocked') blocked.push(`${u}  （${urls.get(u).join('、')}）`);
     else if (r !== true) bad.push(`${r}  ${u}  （${urls.get(u).join('、')}）`);
   }),
 );
 if (certs.length) console.warn('证书链不完整，脚本验证不了，用浏览器打开看一眼：\n  ' + certs.join('\n  '));
+if (blocked.length) console.warn('网站拒绝了脚本访问（401/403/429），可能是拦了海外 IP，用浏览器打开看一眼：\n  ' + blocked.join('\n  '));
 if (bad.length) {
   console.error('打不开的链接：\n  ' + bad.join('\n  '));
   process.exit(1);
 }
-console.log(`${urls.size - certs.length} 个链接都能打开。`);
+console.log(`${urls.size - certs.length - blocked.length} 个链接都能打开。`);
