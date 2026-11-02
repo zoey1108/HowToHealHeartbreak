@@ -121,7 +121,7 @@ ol > li::before { content: counter(n); flex: none; width: 64px; height: 64px; bo
 </style></head><body><div class="card">
 <p class="kicker">失恋后自救手册</p>
 <h1>分手后的头 72 小时</h1>
-<p class="lead">先守住身体，钱和账号别出事。别的都可以往后放。</p>
+<p class="lead">先守住身体，钱、账号和位置别出事。别的都可以往后放。</p>
 <div class="danger">${dangerHtml(false).replace(/<li>[^<]*什么情况该去医院挂号[\s\S]*?<\/li>/, '')}</div>
 <ol style="margin-top:48px">${first.items.map((it) => `<li><span>${esc(it.title)}</span></li>`).join('')}</ol>
 <p class="foot">每条的依据、例外和出处：${repo.replace('https://', '')}<br>CC BY 4.0 · ${version}</p>
